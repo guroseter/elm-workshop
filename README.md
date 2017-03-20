@@ -30,10 +30,9 @@ The slides from the presentation are available [here](https://drive.google.com/f
 
     *  [Atom editor setup](https://github.com/halohalospecial/atom-elmjutsu#setup)
 
-
-1. [`elm-format`](https://github.com/avh4/elm-format#for-elm-018) is a crucial tool to make your Elm experience more enjoyable.
-    * Remember to make sure that `elm-format` is available on your PATH or that you tell your editor where to find it
-    * In Atom, this can be done under package settings for the `elm-format` package: input the path to the `elm-format` binary. (If you for example installed it via `brew` on MacOS, the path should be along the lines of `/urs/local/bin/elm-format-0.18`)
+1. [`elm-format`](https://atom.io/packages/elm-format) is a crucial tool to make your Elm experience more enjoyable.
+    * Remember to ake sure that `elm-format` is available on your PATH or that you tell your editor where to find it
+    * In Atom, this can be done under package settings for the `elm-format` package: input the path to the `elm-format` binary. (If you for example installed it via `brew` on MacOS, the path should be along the lines of `/usr/local/bin/elm-format-0.18`)
     * We also recommend you enable `Format on save`
 
 1. Clone this repo to your computer
@@ -58,7 +57,7 @@ main =
     "Hello, world!"
 ```
 
-As you can see in your browser, the app will fill the screen with an error message then your code does not compile.
+As you can see in your browser, the app will fill the screen with an error message that your code does not compile.
 This might be unfamiliar to you if you're coming from JavaScript to Elm. With JavaScript you have to run your code in the browser to discover any programming mistakes you might have made, while with Elm these errors will be caught right as you hit save in your editor!
 
 > #### A note on Elm's compiler:
@@ -72,25 +71,22 @@ Now, study the on-screen error message.
 
 Our app is now telling us that the value of `main` has the wrong type: it is a `String` but it should be either `Html`, `Svg` or `Program`.
 
-Luckily, we have function named `text` for turning a `String` (such as `"Hello, world!"`) into `Html`. The function has the following signature `text : String -> Html msg`, and you can read it's documentation [here](http://package.elm-lang.org/packages/evancz/elm-html/4.0.1/Html#text).
+To change the `String` (`"Hello, world!"`) into some `Html` we have a function that does exactly that; [`text : String -> Html msg`](http://package.elm-lang.org/packages/evancz/elm-html/4.0.1/Html#text). 
 
 >#### Note:
 >* The official docs has a nice chapter on ["Reading types in Elm"](https://guide.elm-lang.org/types/reading_types.html)
 >* Elm-tutorial has a nice chapter on functions in Elm: ["Function basics"](https://www.elm-tutorial.org/en/01-foundations/02-functions.html)
 
-Use the function `text` to make your program compile and print "Hello, world!" to the screen.
+Use this to make your program compile and print "Hello, world!" to the screen.
 
 ### Creating a greeting function
 
 Now we want to create a function that takes a name and greets.
 It should have this type signature: `greet: String -> String`.
 
-Called with the argument "Erik", the function should produce the string "Hello, Erik". Thus:
+Called with "Erik", it should produce the string "Hello, Erik". Thus:
 
-```
-> greet "Erik"
-"Hello, Erik" : String
-```
+`greet "Erik" == "Hello, Erik"`
 
 Here is an example of a function that takes two numbers and returns the sum of those numbers:
 
@@ -210,14 +206,16 @@ A union type is like a Java or C# enumerable - a union type is a value that may 
 type PieceColor = White | Black
 ```
 
-`PieceColor` is now treated as a normal type in our system, just as `String` or `Bool`. `White` or `Black` are _constructor functions_, functions that take _zero_ arguments and return a value of type `PieceColor`. Or, said with a type signature:
+`PieceColor` is now treated a fullworthy type in our system, just as `String` or `Bool`. `White` or `Black` are _constructor functions_, functions that take _zero_ arguments and return a value of type `PieceColor`. Or, said with a type signature:
 
 ```elm
 White : PieceColor
 Black : PieceColor
 ```
 
-Union types may also carry data. This means that the _constructor functions_ for such union type values aren't zero argument functions. Let's look at an example:
+Union types may also carry data. This means that the _constructor functions_ for such union type values aren't zero argument functions:
+
+Union types may also carry data. Let's look at an example:
 
 ```elm
 type CustomerAge = Unknown | Known Int
@@ -264,13 +262,13 @@ This allows to use this type throughout our code:
 
 ```elm
 getName : Customer -> String
-getName customer =
+getName customer = 
 	customer.name
 ```
 
 Imagine calling this function with an object without a name field.
 In JavaScript, this would obviously crash hard, but in Elm - the code won't even compile!
-This moves the discovery of errors from runtime to compile time (when you hit _save_ in your editor), which significantly improves our feedback cycle!
+This moves the time of discovering the error from compile time (when you hit _save_ in your editor) to runtime, which significally improves our feedback cycle!
 
 Now, create a type alias called `Card` that defines the card data structure from before.
 Use this new type in the signatures of `viewCard` and `card`
