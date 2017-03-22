@@ -28,8 +28,6 @@ The slides from the presentation are available [here](https://drive.google.com/f
 
 1. Install a [`plugin`](https://guide.elm-lang.org/install.html#configure-your-editor) for your editor. At the time of writing, Atom's Elm integration seems the best so we **strongly** recommend you use that, even if Atom is not usually your main editor of choice.
 
-    *  [Atom editor setup](https://github.com/halohalospecial/atom-elmjutsu#setup)
-
 1. [`elm-format`](github.com/avh4/elm-format#for-elm-018) is a crucial tool to make your Elm experience more enjoyable.
     * Remember to ake sure that `elm-format` is available on your PATH or that you tell your editor where to find it
     * In Atom, this can be done under package settings for the `elm-format` package: input the path to the `elm-format` binary. (If you for example installed it via `brew` on MacOS, the path should be along the lines of `/urs/local/bin/elm-format-0.18`)
@@ -57,7 +55,7 @@ main =
     "Hello, world!"
 ```
 
-As you can see in your browser, the app will fill the screen with an error message then your code does not compile.
+As you can see in your browser, the app will fill the screen with an error message that your code does not compile.
 This might be unfamiliar to you if you're coming from JavaScript to Elm. With JavaScript you have to run your code in the browser to discover any programming mistakes you might have made, while with Elm these errors will be caught right as you hit save in your editor!
 
 > #### A note on Elm's compiler:
@@ -337,7 +335,7 @@ See the docs on [how to update a record](http://elm-lang.org/docs/records#updati
 1. Change `main` to `Html.beginnerProgram { ... }`. Read the docs to see what parameters it accepts!
 1. Create a type alias `Model` that has the following type: `{ cards : List Card }`
 1. Create the union type `Msg` with only one constructor: `CardClick Card`
-1. Use pattern matching in `update` on the type of `Msg` and open the clicked card
+1. Use pattern matching in `update` on the type of `Msg` and open the clicked card. PS for now we just have a single case, later this function will be extended to include several cases.
 1. Add `import Html.Events exposing (..)` and add an `onClick` event handler on closed cards.
 
 When this section is complete, you should render three closed cards, each of them opening when clicked.
